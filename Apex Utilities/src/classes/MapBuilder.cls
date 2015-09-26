@@ -33,14 +33,14 @@ public class MapBuilder
 		Takes a list of SObjects and groups them into a map by the field name specified.
 		If there are multiple sobjects with the same value in the specified field, they will be overwritten.
 	*/
-	public static map<Object, SObject> GroupSObjectListByUniqueField(list<SObject> sobjects, Schema.DescribeFieldResult fieldAPIName)
+	public static map<Object, SObject> GroupSObjectListByUniqueField(list<SObject> sobjects, Schema.sObjectField field)
 	{
-		map<Object, SObject> sobjectByField = new map<Object, list<SObject>>();
+		map<Object, SObject> sobjectByField = new map<Object, SObject>();
 		for(SObject sobjectIterator : sobjects)
 		{
 			Object key = sobjectIterator.get(field);
-			sobjectMultiMap.put(key, sobjectIterator);
+			sobjectByField.put(key, sobjectIterator);
 		}	
-		return sobjectMultiMap;
+		return sobjectByField;
 	}
 }
