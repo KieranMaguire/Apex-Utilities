@@ -6,7 +6,7 @@ public class MapBuilder
 	map<Object, SObject> sobjectMap;
 	
 	/*
-		
+		Takes a list of SObjects and groups them into a map by the field name specified 
 	*/
 	public static map<Object, list<SObject>> GroupSObjectListByField(list<SObject> sobjects, Schema.sObjectField field)
 	{
@@ -16,22 +16,31 @@ public class MapBuilder
 			throw new InvalidParameterException('Argument Cannot be null');
 		}
 		
-		map<Object, list<SObject>> sobjectMultiMap = new map<Object, list<SObject>>();
+		map<Object, list<SObject>> sobjectsByField = new map<Object, list<SObject>>();
 		for(SObject sobjectIterator : sobjects)
 		{
 			Object key = sobjectIterator.get(field);
-			if(!sobjectMultiMap.containsKey(key))
+			if(!sobjectsByField.containsKey(key))
 			{
-				sobjectMultiMap.put(key, new list<SObject>());
+				sobjectsByField.put(key, new list<SObject>());
 			}
-			sobjectMultiMap.get(key).add(sobjectIterator);
+			sobjectsByField.get(key).add(sobjectIterator);
 		}	
-		return sobjectMultiMap;
+		return sobjectsByField;
 	}
 	
-	public static map<Object, list<SObject>> GroupSObjectListByUniqueField(list<SObject> sobjects, Schema.SObjectType sobjType, Schema.DescribeFieldResult fieldAPIName)
+	/*
+		Takes a list of SObjects and groups them into a map by the field name specified.
+		If there are multiple sobjects with the same value in the specified field, they will be overwritten.
+	*/
+	public static map<Object, SObject> GroupSObjectListByUniqueField(list<SObject> sobjects, Schema.DescribeFieldResult fieldAPIName)
 	{
-		return null; //map<Object, SObject> sobjectMultiMap;
-		
+		map<Object, SObject> sobjectByField = new map<Object, list<SObject>>();
+		for(SObject sobjectIterator : sobjects)
+		{
+			Object key = sobjectIterator.get(field);
+			sobjectMultiMap.put(key, sobjectIterator);
+		}	
+		return sobjectMultiMap;
 	}
 }
