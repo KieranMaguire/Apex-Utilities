@@ -2,5 +2,12 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Apex Utlilities</fullName>
     <description>Unmanaged package that contains generic apex code for utilities and common design patterns</description>
+    <types>
+        <members>InvalidParameterException</members>
+        <members>MapBuilder</members>
+        <members>MapBuilder_Test</members>
+        <members>RecordTypeUtils</members>
+        <name>ApexClass</name>
+    </types>
     <version>33.0</version>
 </Package>
