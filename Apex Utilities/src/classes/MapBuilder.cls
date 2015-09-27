@@ -35,6 +35,11 @@ public class MapBuilder
 	*/
 	public static map<Object, SObject> GroupSObjectListByUniqueField(list<SObject> sobjects, Schema.sObjectField field)
 	{
+		if(	sobjects == null ||
+			field == null)
+		{
+			throw new InvalidParameterException('Argument Cannot be null');
+		}
 		map<Object, SObject> sobjectByField = new map<Object, SObject>();
 		for(SObject sobjectIterator : sobjects)
 		{
